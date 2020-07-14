@@ -1,0 +1,88 @@
+2020-07-10 12:24:05.023 20834-20834/? I/hopfacedetecto: Late-enabling -Xcheck:jni
+2020-07-10 12:24:05.052 20834-20834/? E/hopfacedetecto: Unknown bits set in runtime_flags: 0x8000
+2020-07-10 12:24:05.574 20834-20834/com.rs.photoshopfacedetector I/Perf: Connecting to perf service.
+2020-07-10 12:24:05.588 20834-20834/com.rs.photoshopfacedetector I/hopfacedetecto: [GL_OOM] ClampGrowthLimit 268435456
+2020-07-10 12:24:05.838 20834-20834/com.rs.photoshopfacedetector W/hopfacedetecto: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (greylist, reflection, allowed)
+2020-07-10 12:24:05.839 20834-20834/com.rs.photoshopfacedetector W/hopfacedetecto: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (greylist, reflection, allowed)
+2020-07-10 12:24:06.111 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2205): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/bootstrap-native/arm64-v8a/zlib.so" dev="sda17" ino=3242446 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:06.241 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2206): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/bootstrap-native/arm64-v8a/java/chaquopy.so" dev="sda17" ino=3242430 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:06.269 20834-20877/com.rs.photoshopfacedetector E/Perf: Fail to get file list com.rs.photoshopfacedetector
+2020-07-10 12:24:06.270 20834-20877/com.rs.photoshopfacedetector E/Perf: getFolderSize() : Exception_1 = java.lang.NullPointerException: Attempt to get length of null array
+2020-07-10 12:24:06.274 20834-20877/com.rs.photoshopfacedetector E/Perf: Fail to get file list com.rs.photoshopfacedetector
+2020-07-10 12:24:06.274 20834-20877/com.rs.photoshopfacedetector E/Perf: getFolderSize() : Exception_1 = java.lang.NullPointerException: Attempt to get length of null array
+2020-07-10 12:24:06.321 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2207): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/bootstrap-native/arm64-v8a/_struct.so" dev="sda17" ino=3242425 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:06.331 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2208): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/bootstrap-native/arm64-v8a/binascii.so" dev="sda17" ino=3242428 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:06.371 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2210): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/bootstrap-native/arm64-v8a/_ctypes.so" dev="sda17" ino=3242406 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:06.441 20834-20834/com.rs.photoshopfacedetector W/hopfacedetecto: Accessing hidden method Landroid/os/Handler;-><init>(Landroid/os/Looper;Landroid/os/Handler$Callback;Z)V (greylist, JNI, allowed)
+2020-07-10 12:24:06.441 20834-20834/com.rs.photoshopfacedetector W/hopfacedetecto: Accessing hidden method Landroid/os/Handler;-><init>(Z)V (greylist, JNI, allowed)
+2020-07-10 12:24:06.461 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2211): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/bootstrap-native/arm64-v8a/math.so" dev="sda17" ino=3242402 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:06.743 20834-20834/com.rs.photoshopfacedetector W/hopfacedetecto: Accessing hidden method Landroid/content/Context;->getSharedPreferences(Ljava/io/File;I)Landroid/content/SharedPreferences; (greylist, JNI, allowed)
+2020-07-10 12:24:06.747 20834-20834/com.rs.photoshopfacedetector W/hopfacedetecto: Accessing hidden method Landroid/content/ContextWrapper;->getSharedPreferences(Ljava/io/File;I)Landroid/content/SharedPreferences; (greylist, JNI, allowed)
+2020-07-10 12:24:07.149 20834-20865/com.rs.photoshopfacedetector D/DecorView: onWindowFocusChangedFromViewRoot hasFocus: true, DecorView@400e578[MainActivity]
+2020-07-10 12:24:07.223 20834-20878/com.rs.photoshopfacedetector I/AdrenoGLES: QUALCOMM build                   : 35556ba, I9ca166462c
+    Build Date                       : 08/07/19
+    OpenGL ES Shader Compiler Version: EV031.27.02.00
+    Local Branch                     : 
+    Remote Branch                    : 
+    Remote Branch                    : 
+    Reconstruct Branch               : 
+2020-07-10 12:24:07.223 20834-20878/com.rs.photoshopfacedetector I/AdrenoGLES: Build Config                     : S P 8.0.8 AArch64
+2020-07-10 12:24:07.253 20834-20878/com.rs.photoshopfacedetector I/AdrenoGLES: PFP: 0x016ee187, ME: 0x00000000
+2020-07-10 12:24:07.333 20834-20878/com.rs.photoshopfacedetector W/Gralloc3: mapper 3.x is not supported
+2020-07-10 12:24:07.449 20834-20834/com.rs.photoshopfacedetector W/Choreographer: Already have a pending vsync event.  There should only be one at a time.
+2020-07-10 12:24:07.620 20834-20834/com.rs.photoshopfacedetector I/Choreographer: Skipped 30 frames!  The application may be doing too much work on its main thread.
+2020-07-10 12:24:07.621 20834-20834/com.rs.photoshopfacedetector D/OnePlusJankManager:  Chor uploadMDM JANK_TYPE_ONCE mViewTitle = com.rs.photoshopfacedetector/com.rs.photoshopfacedetector.MainActivity--- jank level = 3
+2020-07-10 12:24:07.719 20834-20834/com.rs.photoshopfacedetector W/Choreographer: Already have a pending vsync event.  There should only be one at a time.
+2020-07-10 12:24:15.753 20834-20834/com.rs.photoshopfacedetector D/Attempted path: content://media/external/file/7188
+2020-07-10 12:24:15.761 20834-20834/com.rs.photoshopfacedetector D/Picture Path: /storage/emulated/0/Snapchat/Snapchat-395741933.jpg
+2020-07-10 12:24:15.921 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2232): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/stdlib-arm64-v8a/_queue.so" dev="sda17" ino=3244535 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.001 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2233): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/chaquopy/lib/libgfortran.so.3" dev="sda17" ino=3244537 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.021 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2234): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/chaquopy/lib/libopenblas.so" dev="sda17" ino=3244536 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.031 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2235): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/numpy/core/_multiarray_umath.so" dev="sda17" ino=3260858 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.111 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2236): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/numpy/core/_multiarray_tests.so" dev="sda17" ino=3260859 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.141 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2237): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/numpy/linalg/lapack_lite.so" dev="sda17" ino=3284524 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.151 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2238): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/numpy/linalg/_umath_linalg.so" dev="sda17" ino=3284525 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:16.201 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2239): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/stdlib-arm64-v8a/_decimal.so" dev="sda17" ino=3244538 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:17.191 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2259): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/stdlib-arm64-v8a/_multiprocessing.so" dev="sda17" ino=3244548 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:17.311 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2260): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/requirements/chaquopy/lib/libjpeg_chaquopy.so" dev="sda17" ino=3242464 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:17.401 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2262): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/stdlib-arm64-v8a/_elementtree.so" dev="sda17" ino=3243118 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:17.411 20834-20834/com.rs.photoshopfacedetector W/hopfacedetector: type=1400 audit(0.0:2263): avc: granted { execute } for path="/data/data/com.rs.photoshopfacedetector/files/chaquopy/AssetFinder/stdlib-arm64-v8a/pyexpat.so" dev="sda17" ino=3243119 scontext=u:r:untrusted_app:s0:c115,c257,c512,c768 tcontext=u:object_r:app_data_file:s0:c115,c257,c512,c768 tclass=file
+2020-07-10 12:24:17.804 20834-20834/com.rs.photoshopfacedetector D/AndroidRuntime: Shutting down VM
+2020-07-10 12:24:17.818 20834-20834/com.rs.photoshopfacedetector E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: com.rs.photoshopfacedetector, PID: 20834
+    java.lang.RuntimeException: Failure delivering result ResultInfo{who=null, request=3, result=-1, data=Intent { dat=content://media/external/file/7188 flg=0x1 }} to activity {com.rs.photoshopfacedetector/com.rs.photoshopfacedetector.MainActivity}: com.chaquo.python.PyException: PermissionError: [Errno 13] Permission denied: '/storage/emulated/0/Snapchat/Snapchat-395741933.jpg'
+        at android.app.ActivityThread.deliverResults(ActivityThread.java:4962)
+        at android.app.ActivityThread.handleSendResult(ActivityThread.java:5003)
+        at android.app.servertransaction.ActivityResultItem.execute(ActivityResultItem.java:51)
+        at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:135)
+        at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:95)
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2109)
+        at android.os.Handler.dispatchMessage(Handler.java:107)
+        at android.os.Looper.loop(Looper.java:214)
+        at android.app.ActivityThread.main(ActivityThread.java:7682)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:516)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:950)
+     Caused by: com.chaquo.python.PyException: PermissionError: [Errno 13] Permission denied: '/storage/emulated/0/Snapchat/Snapchat-395741933.jpg'
+        at <python>.PIL.Image.open(Image.py:2843)
+        at <python>.global_classifier.classify_fake(global_classifier.py:35)
+        at <python>.chaquopy_java.call(chaquopy_java.pyx:283)
+        at <python>.chaquopy_java.Java_com_chaquo_python_PyObject_callAttrThrows(chaquopy_java.pyx:255)
+        at com.chaquo.python.PyObject.callAttrThrows(Native Method)
+        at com.chaquo.python.PyObject.callAttr(PyObject.java:209)
+        at com.rs.photoshopfacedetector.MainActivity.onActivityResult(MainActivity.java:74)
+        at android.app.Activity.dispatchActivityResult(Activity.java:8135)
+        at android.app.ActivityThread.deliverResults(ActivityThread.java:4955)
+        at android.app.ActivityThread.handleSendResult(ActivityThread.java:5003) 
+        at android.app.servertransaction.ActivityResultItem.execute(ActivityResultItem.java:51) 
+        at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:135) 
+        at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:95) 
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2109) 
+        at android.os.Handler.dispatchMessage(Handler.java:107) 
+        at android.os.Looper.loop(Looper.java:214) 
+        at android.app.ActivityThread.main(ActivityThread.java:7682) 
+        at java.lang.reflect.Method.invoke(Native Method) 
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:516) 
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:950) 
+2020-07-10 12:24:17.920 20834-20834/com.rs.photoshopfacedetector I/Process: Sending signal. PID: 20834 SIG: 9
+
