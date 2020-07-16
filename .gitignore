@@ -12,5 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
-app/src/main/python/weights/local.pth
-app/src/main/python/weights/global.pth
+/app/src/main/python/weights/local.pth
+/app/src/main/python/weights/global.pth

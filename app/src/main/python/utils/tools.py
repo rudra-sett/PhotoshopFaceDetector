@@ -1,6 +1,7 @@
 import os
 import cv2
 import torch
+import io
 import numpy as np
 from PIL import Image
 from os.path import dirname, join
@@ -99,7 +100,7 @@ def face_detection(
         #cnn_face_detector = face_detect_model(model_file)
         cnn_face_detector = face_detect_model(join(dirname(__file__), "dlib_face_detector/mmod_human_face_detector.dat"))
     print("got face detector")
-    img = Image.open(img_path).convert('RGB')
+    img = Image.open(io.BytesIO(img_path)).convert('RGB')
     w, h = img.size
     img_shrinked, mult = shrink(img)
 

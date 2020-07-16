@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+import io
 import torch
 from os.path import dirname, join
 from PIL import Image
@@ -32,15 +33,17 @@ tf = transforms.Compose([transforms.ToTensor(),
 def classify_fake(model, img_path, no_crop=False,
                   model_file='utils/dlib_face_detector/mmod_human_face_detector.dat'):
     # Data preprocessing
+    img_path = np.array(img_path)
     print(img_path)
-    im_w, im_h = Image.open(img_path).size
+    im_w, im_h = Image.open(io.BytesIO(img_path)).size
     if no_crop:
-        face = Image.open(img_path).convert('RGB')
+        face = Image.open(io.BytesOP(img_path)).convert('RGB')
     else:
         faces = face_detection(img_path, verbose=False, model_file=model_file)
         if len(faces) == 0:
             print("no face detected by dlib, exiting")
-            sys.exit()
+            return "-1"
+            #sys.exit()
         print("face detected, proceeding with prediction")
         face, box = faces[0]
     print("loading up model and starting evaluation")

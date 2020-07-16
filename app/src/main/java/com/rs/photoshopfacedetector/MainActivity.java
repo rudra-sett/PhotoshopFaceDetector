@@ -19,6 +19,7 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -61,16 +62,13 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
-            String path = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                //Log.d("Attempted path",selectedImage.toString());
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                final byte[] byteArray = stream.toByteArray();
+                bitmap.recycle();
                 picturePath = getPath( this.getApplicationContext( ), selectedImage);
-
-                //Unneeded code from initial version of app (debugging)
-                //Log.d("Picture Path", picturePath);
-                //ImageView img = findViewById(R.id.pic);
-                //img.setImageBitmap(bitmap);
 
                 txtbox = findViewById(R.id.resultview);
                 loadingbar = findViewById(R.id.loadingsymbol);
@@ -79,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         txtbox.setText("Please wait, your photo is being processed...");
                         Log.d("Threading", "user selected picture, starting processing!");
-                        processimage(picturePath);
+                        //processimage(picturePath);
+                        processimage(byteArray);
                         }
                 }).start();
                 Log.d("timing","task is supposedly done, or does it run next step at the same time?");
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //processes image
-    public void processimage(String path_to_picture){
+    public void processimage(byte[] path_to_picture){
         Python py = Python.getInstance();
         PyObject pyfile = py.getModule("global_classifier");
         String result = pyfile.callAttr("classify_fake","weights/global.pth",path_to_picture).toString();
