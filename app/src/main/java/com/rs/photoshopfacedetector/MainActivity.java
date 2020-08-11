@@ -3,26 +3,29 @@ package com.rs.photoshopfacedetector;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
+//import com.android.vending.expansion.zipfile;
 import com.chaquo.python.android.AndroidPlatform;
+//import zip_file;
+import com.android.vending.expansion.zipfile.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Logger;
+import java.io.*;
+import java.util.Vector;
+import java.util.zip.ZipFile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +40,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public byte[] readdata(){
+        try {
+            ZipResourceFile weights = APKExpansionSupport.getAPKExpansionZipFile(this,1,0);
+            /*String[] weights2 = getAPKExpansionFiles(this,1,0);
+            Log.d("expansiontag",weights2[0]);*/
+            InputStream strem =  weights.getInputStream("global.pth");
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            int nRead;
+            byte[] data = new byte[82546530]; //this is the exact size, in bytes, of the model
+
+            while ((nRead = strem.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            byte[] globalweight = buffer.toByteArray();
+
+            strem.close();
+            return globalweight;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast toast = Toast.makeText(this, "did not get expansion file!", Toast.LENGTH_LONG);
+            toast.show();
+            return new byte[0];
+        }
+
+    }
     //GET IMAGE FROM GALLERY
     public static final int GET_FROM_GALLERY = 3;
     public boolean running = false;
@@ -117,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
     public void processimage(byte[] path_to_picture){
         Python py = Python.getInstance();
         PyObject pyfile = py.getModule("global_classifier");
-        String result = pyfile.callAttr("classify_fake","weights/global.pth",path_to_picture).toString();
+        //String result = pyfile.callAttr("classify_fake","weights/global.pth",path_to_picture).toString();
+        String result = pyfile.callAttr("classify_fake",readdata(),path_to_picture).toString();
         TextView txtbox = findViewById(R.id.resultview);
         txtbox.setText("Probability of being Photoshopped: " + result.substring(0,5) + "%");
         Log.d("Result",result);

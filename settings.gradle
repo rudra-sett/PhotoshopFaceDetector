@@ -1,2 +1,3 @@
 rootProject.name='PhotoshopFaceDetector'
-include ':app'
+include ':app', ':zip_file'
+project(':zip_file').projectDir = new File('libs/zip_file')

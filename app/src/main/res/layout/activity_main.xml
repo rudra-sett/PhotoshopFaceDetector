@@ -64,7 +64,7 @@
             android:visibility="gone"/>
 
     <TextView
-            android:text="Select a photo to check if it is Photoshopped"
+            android:text="Select a photo to check if a face has been altered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
@@ -75,7 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="18sp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

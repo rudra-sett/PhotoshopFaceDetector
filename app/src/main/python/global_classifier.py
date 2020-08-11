@@ -30,7 +30,7 @@ def load_classifier(model_path, gpu_id):
 tf = transforms.Compose([transforms.ToTensor(),
                          transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                               std=[0.229, 0.224, 0.225])])
-def classify_fake(model, img_path, no_crop=False,
+def classify_fake(modelpth, img_path, no_crop=False,
                   model_file='utils/dlib_face_detector/mmod_human_face_detector.dat'):
     # Data preprocessing
     img_path = np.array(img_path)
@@ -47,10 +47,11 @@ def classify_fake(model, img_path, no_crop=False,
         print("face detected, proceeding with prediction")
         face, box = faces[0]
     print("loading up model and starting evaluation")
-    modelpath = join(dirname(__file__), "weights/global.pth")
+    #modelpath = join(dirname(__file__), "weights/global.pth")
     #model = join(dirname(__file__), "weights/global.pth")
-    #the argument passed from Java doesn't target the model correctly, so it's hardcoded here
-    model = load_classifier(modelpath, 0)
+    #the argument passed from Java doesn't target the model correctly, so it's hardcoded here (8/11/2020, and I don't know what I meant here)
+    #modelpath = io.BytesIO(model)
+    model = load_classifier(io.BytesIO(modelpth), 0)
     face = resize_shorter_side(face, 400)[0]
     face_tens = tf(face).to(model.device)
 
