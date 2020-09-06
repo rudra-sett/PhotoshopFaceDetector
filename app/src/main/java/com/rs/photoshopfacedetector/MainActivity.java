@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,9 +14,7 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -51,14 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
                 int nRead;
                 byte[] data = new byte[82546530]; //this is the exact size, in bytes, of the model
-
-                while ((nRead = strem.read(data, 0, data.length)) != -1) {
+                /*while ((nRead = strem.read(data, 0, data.length)) != -1) {
                     buffer.write(data, 0, nRead);
                 }
-                byte[] globalweight = buffer.toByteArray();
-
+                byte[] globalweight = buffer.toByteArray();*/
+                //This implementation requires much less RAM
+                int offset = 0;
+                int numRead = 0;
+                while (offset < data.length
+                        && (numRead=strem.read(data, offset, data.length-offset)) >= 0) {
+                    offset += numRead;
+                }
                 strem.close();
-                return globalweight;
+                return data;
             }else{
                 //Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
                 //toast.show();
@@ -149,12 +153,26 @@ public class MainActivity extends AppCompatActivity {
                 txtbox = findViewById(R.id.resultview);
                 loadingbar = findViewById(R.id.loadingsymbol);
                 loadingbar.setVisibility(View.VISIBLE);
+                RadioButton heat = findViewById(R.id.heatmaprb);
+                RadioButton prob = findViewById(R.id.probabilityrb);
+                boolean heaton = false;
+                if (heat.isChecked()){
+                    heaton = true;
+                }
+                final boolean finalHeaton = heaton;
                 new Thread(new Runnable() {
                     public void run() {
                         txtbox.setText("Please wait, your photo is being processed...");
                         Log.d("Threading", "user selected picture, starting processing!");
+                        if (finalHeaton){
+                            classifylocal(byteArray);
+                        }
+                        if (!finalHeaton){
+                            classifyglobal(byteArray);
+                        }
                         //processimage(picturePath);
-                        classifyglobal(byteArray);
+                        //classifyglobal(byteArray);
+                        //classifylocal(byteArray);
                         }
                 }).start();
                 //Log.d("timing","task is supposedly done, or does it run next step at the same time?");
@@ -194,7 +212,31 @@ public class MainActivity extends AppCompatActivity {
         Python py = Python.getInstance();
         PyObject pyfile = py.getModule("global_classifier");
         //String result = pyfile.callAttr("classify_fake","weights/global.pth",path_to_picture).toString();
-        //byte[] mod= readglobald();
+        byte[] mod= readglobald();
+        //byte[] mod = readlocald();
+        if (mod.length < 100){
+            //Looper.prepare();
+            Log.d("expf","expansion is missing!");
+            //Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
+            //toast.show();
+            return;
+        }
+        final String result = pyfile.callAttr("classify_fake",mod,path_to_picture).toString();
+
+        loadingbar.post(new Runnable() {
+            public void run() {
+                loadingbar.setVisibility(View.INVISIBLE);
+                TextView txtbox = findViewById(R.id.resultview);
+                txtbox.setText("Probability of being Photoshopped: " + result.substring(0,5) + "%");
+                Log.d("Result",result);
+            }
+        });
+        running = false;
+    }
+    public void classifylocal(byte[] path_to_picture){
+        Python py = Python.getInstance();
+        PyObject pyfile = py.getModule("local_detector");
+        //String result = pyfile.callAttr("classify_fake","weights/global.pth",path_to_picture).toString();
         byte[] mod = readlocald();
         if (mod.length < 100){
             //Looper.prepare();
@@ -203,13 +245,18 @@ public class MainActivity extends AppCompatActivity {
             //toast.show();
             return;
         }
-        String result = pyfile.callAttr("classify_fake",mod,path_to_picture).toString();
-        TextView txtbox = findViewById(R.id.resultview);
-        txtbox.setText("Probability of being Photoshopped: " + result.substring(0,5) + "%");
-        Log.d("Result",result);
+        byte[] result = pyfile.callAttr("detect_changes",mod,path_to_picture).toJava(byte[].class);
+        //result.
+        final TextView txtbox = findViewById(R.id.resultview);
+        //txtbox.setText("Probability of being Photoshopped: " + result.substring(0,5) + "%");
+        //Log.d("Result",result);
+        final ImageView pic = findViewById(R.id.pic);
+        final Bitmap returned = BitmapFactory.decodeByteArray(result,0,result.length);
         loadingbar.post(new Runnable() {
             public void run() {
                 loadingbar.setVisibility(View.INVISIBLE);
+                pic.setImageBitmap(returned);
+                txtbox.setText("");
             }
         });
         running = false;

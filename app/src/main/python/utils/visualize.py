@@ -1,4 +1,5 @@
 import os
+import io
 import cv2
 import torch
 import numpy as np
@@ -56,4 +57,8 @@ def get_heatmap_batch(img_batch, pred_batch):
 def save_heatmap_cv(img, magn, path, max_flow_mag=7):
     cv_out = get_heatmap_cv(img, magn, max_flow_mag)
     out = Image.fromarray(cv_out)
-    out.save(path, quality=95)
+    outba = io.BytesIO()
+    out.save(outba, format='PNG')
+    outba = outba.getvalue()
+    return outba
+    #out.save(path, quality=95)

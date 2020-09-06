@@ -29,39 +29,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="90dp"
-            app:layout_constraintTop_toBottomOf="@+id/resultview"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup"
+            app:layout_constraintBottom_toBottomOf="@id/loadingsymbol"
             android:layout_marginBottom="218dp"
-            android:onClick="getimagebutton"/>
+            android:onClick="getimagebutton"
+            app:layout_constraintVertical_bias="0.0"/>
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@android:color/background_light"
             android:id="@+id/pic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="118dp"
-            android:layout_marginBottom="204dp"
+            app:layout_constraintTop_toBottomOf="@id/textView"
             app:layout_constraintBottom_toTopOf="@+id/resultview"
             android:padding="10dp"
-            android:visibility="gone"/>
+            android:visibility="visible"
+            android:layout_margin="10dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"/>
 
     <ProgressBar
             style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
             android:id="@+id/loadingsymbol"
             android:layout_marginEnd="184dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="179dp"
-            android:layout_marginTop="74dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/getimage"
-            android:layout_marginBottom="96dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone"/>
+            android:visibility="invisible"/>
 
     <TextView
             android:text="Select a photo to check if a face has been altered"
@@ -69,13 +70,40 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="187dp"
             app:layout_constraintBottom_toTopOf="@+id/resultview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="18sp"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            app:layout_constraintVertical_bias="0.19999999"/>
+
+    <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/getimage"
+            app:layout_constraintTop_toBottomOf="@+id/resultview"
+            android:checkedButton="@id/heatmaprb"
+            android:id="@+id/radiogroup"
+            app:layout_constraintVertical_bias="0.83"
+            android:layout_marginTop="32dp">
+
+        <RadioButton
+                android:text="Probability"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/probabilityrb"/>
+
+        <RadioButton
+                android:text="Heatmap"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/heatmaprb"/>
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
