@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -40,26 +41,73 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public byte[] readdata(){
+    public byte[] readglobald(){
         try {
-            ZipResourceFile weights = APKExpansionSupport.getAPKExpansionZipFile(this,1,0);
+            ZipResourceFile weights = APKExpansionSupport.getAPKExpansionZipFile(this,3,0);
             /*String[] weights2 = getAPKExpansionFiles(this,1,0);
             Log.d("expansiontag",weights2[0]);*/
-            InputStream strem =  weights.getInputStream("global.pth");
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            int nRead;
-            byte[] data = new byte[82546530]; //this is the exact size, in bytes, of the model
+            if (weights!= null) {
+                InputStream strem = weights.getInputStream("global.pth");
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[82546530]; //this is the exact size, in bytes, of the model
 
-            while ((nRead = strem.read(data, 0, data.length)) != -1) {
-                buffer.write(data, 0, nRead);
+                while ((nRead = strem.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                byte[] globalweight = buffer.toByteArray();
+
+                strem.close();
+                return globalweight;
+            }else{
+                //Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
+                //toast.show();
+                return new byte[0];
             }
-            byte[] globalweight = buffer.toByteArray();
-
-            strem.close();
-            return globalweight;
         } catch (IOException e) {
             e.printStackTrace();
-            Toast toast = Toast.makeText(this, "did not get expansion file!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
+            toast.show();
+            return new byte[0];
+        }
+
+    }
+    public byte[] readlocald(){
+        try {
+            ZipResourceFile weights = APKExpansionSupport.getAPKExpansionZipFile(this,3,0);
+            /*String[] weights2 = getAPKExpansionFiles(this,1,0);
+            Log.d("expansiontag",weights2[0]);*/
+            if (weights!= null) {
+                InputStream strem = weights.getInputStream("local.pth");
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                //Log.d("size",buffer.size());
+                Log.d("size",Integer.toString(strem.available()));
+                int nRead;
+                byte[] data = new byte[247495840]; //this is the exact size, in bytes, of the model
+                Log.d("checking","finished allocating the bytearray");
+                int offset = 0;
+                int numRead = 0;
+                while (offset < data.length
+                        && (numRead=strem.read(data, offset, data.length-offset)) >= 0) {
+                    offset += numRead;
+                }
+                //byte [] globalweight  = strem.
+                /*while ((nRead = strem.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                byte[] globalweight = buffer.toByteArray();*/
+
+                strem.close();
+                return data;
+                //return globalweight;
+            }else{
+                //Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
+                //toast.show();
+                return new byte[0];
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
             toast.show();
             return new byte[0];
         }
@@ -106,10 +154,10 @@ public class MainActivity extends AppCompatActivity {
                         txtbox.setText("Please wait, your photo is being processed...");
                         Log.d("Threading", "user selected picture, starting processing!");
                         //processimage(picturePath);
-                        processimage(byteArray);
+                        classifyglobal(byteArray);
                         }
                 }).start();
-                Log.d("timing","task is supposedly done, or does it run next step at the same time?");
+                //Log.d("timing","task is supposedly done, or does it run next step at the same time?");
 
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
@@ -142,11 +190,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //processes image
-    public void processimage(byte[] path_to_picture){
+    public void classifyglobal(byte[] path_to_picture){
         Python py = Python.getInstance();
         PyObject pyfile = py.getModule("global_classifier");
         //String result = pyfile.callAttr("classify_fake","weights/global.pth",path_to_picture).toString();
-        String result = pyfile.callAttr("classify_fake",readdata(),path_to_picture).toString();
+        //byte[] mod= readglobald();
+        byte[] mod = readlocald();
+        if (mod.length < 100){
+            //Looper.prepare();
+            Log.d("expf","expansion is missing!");
+            //Toast toast = Toast.makeText(this, "Please reinstall this app from the Play Store", Toast.LENGTH_LONG);
+            //toast.show();
+            return;
+        }
+        String result = pyfile.callAttr("classify_fake",mod,path_to_picture).toString();
         TextView txtbox = findViewById(R.id.resultview);
         txtbox.setText("Probability of being Photoshopped: " + result.substring(0,5) + "%");
         Log.d("Result",result);
